@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Playboi Carti Fun Page</title>
+
+    <style>
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            scroll-behavior: smooth;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.light {
+            background: white;
+            color: black;
+        }
+
+        header {
+            background: black;
+            text-align: center;
+            padding: 60px;
+        }
+
+        header img.logo {
+            height: 80px;
+            display: inline-block;
+                    }
+
+        @keyframes glow-img {
+            0% { box-shadow: 0 0 10px red, 0 0 20px red; }
+            50% { box-shadow: 0 0 20px red, 0 0 30px red; }
+            100% { box-shadow: 0 0 10px red, 0 0 20px red; }
+        }
+
+        .marquee {
+            background: red;
+            color: black;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 5px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .marquee div {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        nav {
+            background: #111;
+            text-align: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: red;
+            text-shadow: 2px 2px #fff, -2px -2px red;
+            font-style: italic;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 50px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: red;
+            left: 0;
+            bottom: -5px;
+        }
+
+        .hero {
+            height: 1200px;
+            background: url("background2.gif");
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid red;
+        }
+
+        .album {
+            background: #111;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .album:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px red;
+            border-color: red;
+        }
+
+        .gif-link {
+            display: inline-block;
+            margin: 20px 0;
+            border: 2px solid #222;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            line-height: 0;
+        }
+
+        .gif-link:hover {
+            transform: scale(1.02);
+            border-color: red;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+        }
+
+        .gif-link img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        .gallery img {
+            width: 250px;
+            margin: 10px;
+            border-radius: 10px;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            filter: grayscale(100%);
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .gallery img:hover {
+            filter: grayscale(0%);
+        }
+
+        .tour-alert {
+            border: 2px dashed red;
+            padding: 20px;
+            color: red;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 30px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: white;
+            color: red;
+        }
+
+        footer {
+            background: #111;
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .social-link:hover {
+            color: red;
+        }
+
+        section p, section h3 {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible p, section.visible h3 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="cartilogo.png" alt="Carti Logo" class="logo">
+</header>
+
+<button id="theme-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">Тема</button>
+
+<div class="marquee">
+    <div>
+        MUSIC OUT NOW // RATHER LIE // EVIL J0RDAN // ALL RED // CRUSH // GOOD CREDIT // FINE SHIT // LIKE WEEZY // MUSIC OUT NOW 
+    </div>
+</div>
+
+<div class="hero"></div>
+
+<nav>
+    <a href="#bio">Биография</a>
+    <a href="#albums">Альбомы</a>
+    <a href="#hits">Хиты</a>
+    <a href="#music">Музыка</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#facts">Факты</a>
+</nav>
+
+<section id="bio">
+    <h2>Биография</h2>
+    <p>Playboi Carti (Джордан Террелл Картер) — американский рэпер, автор-исполнитель. Родился 13 сентября в Атланте, штат Джорджия. Начал заниматься рэпом в раннем возрасте под псевдонимом Sir Cartier, большую часть раннего творчества удалил из интернета.</p>
+    <p>Дебютный студийный альбом Die Lit (2018) достиг 3-й строчки в американском Billboard 200. Пластинка Whole Lotta Red (2020) дебютировала под номером один и стала первым релизом Картера, возглавившим чарт.</p>
+    <p>14 марта 2025 года вышел долгожданный третий альбом — <strong>MUSIC</strong>.</p>
+</section>
+
+<section id="albums">
+    <h2>Альбомы</h2>
+    <a href="https://open.spotify.com/album/1b9onvAExVvX99Y0Y678mK0" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="album">
+            <h3>Playboi Carti (2017)</h3>
+            <p>Magnolia, wokeuplikethis*</p>
+        </div>
+    </a>
+    <a href="https://open.spotify.com/album/1b9onvAExVvX99Y0Y678mK1" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="album">
+            <h3>Die Lit (2018)</h3>
+            <p>Shoota, R.I.P., Long Time</p>
+        </div>
+    </a>
+    <a href="https://open.spotify.com/album/1b9onvAExVvX99Y0Y678mK2" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="album">
+            <h3>Whole Lotta Red (2020)</h3>
+            <p>Sky, Stop Breathing, Slay3r</p>
+        </div>
+    </a>
+    <a href="https://open.spotify.com/album/1b9onvAExVvX99Y0Y678mK3" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="album">
+            <h3>MUSIC (2025)</h3>
+            <p>RATHER LIE, EVIL J0RDAN, LIKE WEEZY</p>
+        </div>
+    </a>
+</section>
+
+<section id="hits">
+    <h2>Популярные треки</h2>
+    <p>Magnolia // Shoota // Sky // Stop Breathing // R.I.P. // Long Time // RATHER LIE // EVIL J0RDAN // Timeless // FE!N // Popular // Type Shit // Location </p>
+    <button onclick="alert('🧛 SLATT! CARTI FOREVER 🧛')">
+        Carti лучший
+    </button>
+</section>
+
+<section id="music">
+    <h2>Музыка (Клипы)</h2>
+    <p>Magnolia</p>
+    <a href="https://www.youtube.com/watch?v=oCveByMXd_0" target="_blank" class="gif-link">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNm13eWlubW11b250d3g3cDN0MmxmZDlwdWRhZXo4amRxaHVpb2swMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohzAoagehS8piMUHS/giphy.gif" alt="Magnolia GIF">
+    </a>
+
+    <p>FOMDJ</p>
+    <a href="https://youtu.be/N5dOy9FGtDg?si=_f9ScppM1bOBFPwU" target="_blank" class="gif-link">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTliYmt2amF6eGh5enB0Zzd1OGdpMWJnbGdtNG5wYWt5MmJ3dGZpMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PDNQ7rMVsQX93ebiXH/giphy.gif" alt="FOMDJ GIF">
+    </a>
+
+<p>Sky</p>
+    <a href="https://youtu.be/KnumAWWWgUE?si=7FvygdzlONQZnRn2" target="_blank" class="gif-link">
+        <img src="https://media1.tenor.com/m/rdjtGbhWC6gAAAAd/sky-playboi-carti.gif" 
+alt="sky GIF">
+    </a>
+
+<p>wokeuplikethis*</p>
+    <a href="https://youtu.be/REmZhFKmOmo?si=12kBY5ST0_IBbuMs" target="_blank" class="gif-link">
+        <img src="https://media1.tenor.com/m/0RPhePnbVyAAAAAd/woo-hoo.gif" 
+alt="nc GIF">
+    </a>
+
+<p>New Choppa</p>
+    <a href="https://youtu.be/_JZqoGz0b6o?si=N5uniI7ZUfFbIimV" target="_blank" class="gif-link">
+        <img src="https://media1.tenor.com/m/VV1n1Mr31OgAAAAd/playboi-carti-new-choppa.gif" 
+alt="wult GIF">
+    </a>
+
+</section>
+
+<section id="gallery">
+    <h2>Галерея</h2>
+    <div class="gallery">
+        <img src="pic1.jpg" alt="Carti 1">
+        <img src="pic2.jpg" alt="Carti 2">
+        <img src="pic3.jpg" alt="Carti 3">
+        <img src="pic8.png" alt="Carti 4">
+        <img src="pic7.jpg" alt="Carti 5">
+        <img src="pic6.jpg" alt="Carti 6">
+        <img src="pic4.jpg" alt="Carti 7">
+        <img src="pic5.jpg" alt="Carti 8">
+    </div>
+</section>
+
+<section id="facts">
+    <h2>Факты</h2>
+    <p>Издание GQ назвало Playboi Carti иконой молодёжного стиля.</p>
+    <p>Вдохновением для Whole Lotta Red стали фильмы вампирской тематики.</p>
+    <p>Получил награду Artist of the Year 2024 на Billboard’s R&B Hip-Hop Power Players.</p>
+    
+    <div class="tour-alert">
+        ANTAGONIST TOUR // GLOBAL 2026 // COMING SOON
+    </div>
+</section>
+
+<footer>
+    <div style="margin-bottom: 20px;">
+        <a href="https://www.instagram.com/playboicarti/" target="_blank" class="social-link">INSTAGRAM</a>
+        <a href="https://twitter.com/playboicarti" target="_blank" class="social-link">TWITTER</a>
+        <a href="https://www.youtube.com/@playboicarti" target="_blank" class="social-link">YOUTUBE</a>
+    </div>
+    <p>Fan site Playboi Carti &copy; 2026</p>
+</footer>
+
+<div id="modal">
+    <img src="" alt="Expanded Image">
+</div>
+
+<script>
+    // Плавное появление секций и текста
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {threshold: 0.2});
+    sections.forEach(section => observer.observe(section));
+
+    // Галерея с увеличением и 3D Tilt
+    const modal = document.getElementById('modal');
+    const modalImg = modal.querySelector('img');
+    document.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
+        });
+
+        img.addEventListener('mousemove', e => {
+            const rect = img.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const dx = (x - cx) / cx;
+            const dy = (y - cy) / cy;
+            img.style.transform = `rotateY(${dx * 25}deg) rotateX(${-dy * 25}deg)`;
+            img.style.boxShadow = `0 20px 40px rgba(255,0,0,0.5)`;
+        });
+
+        img.addEventListener('mouseleave', () => {
+            img.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            img.style.boxShadow = 'none';
+        });
+    });
+    modal.addEventListener('click', () => modal.style.display = 'none');
+
+    // Переключение темы
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light');
+    });
+</script>
+
+</body>
+</html>
